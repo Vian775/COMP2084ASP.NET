@@ -1,0 +1,55 @@
+//Viyan Rony 
+//200586309
+//Date: 2025-02-07
+//lab 2 random story generator 
+//Declaring and initialize variables
+const customName = document.getElementById("customname");
+const randomize = document.querySelector(".randomize");
+const story = document.querySelector(".story");
+
+//Create the variable that contains the story string
+const storyText = "It was 94 Fahrenheit outside, so :insertx: went for a walk. When they got to :inserty:, they stared in horror for a few moments, then :insertz:. Bob saw the whole thing, but he was not surprised — :insertx: weighs 300 pounds, and it was a hot day.";
+
+//Create three arrays with different elements
+const insertX = ["Donald Trump", "Jackie Chan", "Santa Claus"];
+const insertY = ["Area 51", "Death Valley", "Aruba"];
+const insertZ = ["instanly  combusted", "rapidly changed", "evaporated instantly"];
+
+//Function to return a random array element
+function randomValueFromArray(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+function result() {
+    //Create a new variable to store the modified story
+    let newStory = storyText;
+
+    //Generate random values for placeholders
+    const xItem = randomValueFromArray(insertX);
+    const yItem = randomValueFromArray(insertY);
+    const zItem = randomValueFromArray(insertZ);
+
+    //Replace placeholders in the story
+    newStory = newStory.replace(":insertx:", xItem);
+    newStory = newStory.replace(":insertx:", xItem); // Replace again for the second occurrence
+    newStory = newStory.replace(":inserty:", yItem);
+    newStory = newStory.replace(":insertz:", zItem);
+
+    //Replace 'Bob' with the custom name if entered
+    if (customName.value !== "") {
+        newStory = newStory.replace("Bob", customName.value);
+    }
+
+    //Convert weight and temperature if metric is selected
+    if (document.getElementById("metric").checked) {
+        const weight = Math.round(300 * 0.453592);
+        newStory = newStory.replace("300 pounds", `${weight} kg`);
+        const temp = Math.round((94 - 32) * (5 / 9));
+        newStory = newStory.replace("94 Fahrenheit", `${temp} Celsius`);
+    }
+
+    //Display the story
+    story.textContent = newStory;
+    story.style.visibility = "visible";
+}
+randomize.addEventListener("click", result);
