@@ -1,0 +1,14 @@
+@model DotNetDrinksWebUI.Models.Product
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>@Model.Name</h1>
+
+<a href="@Url.Content(Model.ImageUrl)" target="_blank">
+    <img src="@Url.Content(Model.ThumbnailUrl)" alt="@Model.Name" class="img-thumbnail" />
+</a>
+
+<p>@Model.Description</p>
+<p>Price: @Model.Price.ToString("C")</p>
